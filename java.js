@@ -37,32 +37,13 @@ function startGame(category) {
     currentGuess = [];
     nextLetter = 0;
     initBoard();
-    initKeyboard();
+    document.addEventListener('keyup', handleKeyUp);
 }
 
-function initKeyboard() {
-    const keyboardLayout = [
-        ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-        ['Backspace', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Enter']
-    ];
-    let keyboard = document.getElementById('keyboard-cont');
-    keyboard.innerHTML = '';
-    keyboardLayout.forEach(row => {
-        let rowDiv = document.createElement('div');
-        row.forEach(key => {
-            let button = document.createElement('button');
-            button.textContent = key === 'Backspace' ? 'Del' : key === 'Enter' ? 'Enter' : key;
-            button.className = 'keyboard-button';
-            button.onclick = () => handleKeyClick(key);
-            rowDiv.appendChild(button);
-        });
-        keyboard.appendChild(rowDiv);
-    });
-}
-
-function handleKeyClick(key) {
+function handleKeyUp(event) {
     if (guessesRemaining === 0) return;
+
+    let key = event.key;
 
     if (key === 'Enter') {
         checkGuess();
@@ -74,8 +55,8 @@ function handleKeyClick(key) {
         return;
     }
 
-    if (key.match(/^[a-z]$/) && currentGuess.length < 5) {
-        insertLetter(key);
+    if (key.match(/^[a-z]$/i)) {
+        insertLetter(key.toLowerCase());
     }
 }
 
@@ -118,6 +99,7 @@ function checkGuess() {
         }
         alert("You guessed right! Game over!");
         guessesRemaining = 0;
+        document.removeEventListener('keyup', handleKeyUp);
         return;
     }
 
@@ -145,5 +127,6 @@ function checkGuess() {
     if (guessesRemaining === 0) {
         alert("You've run out of guesses! Game over!");
         alert(`The correct word was: "${currentWord}"`);
+        document.removeEventListener('keyup', handleKeyUp);
     }
 }
