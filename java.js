@@ -1,9 +1,10 @@
+// script.js
 'use strict';
 
 const words = {
-    normal: ["worst", "youth", "happy", "state", "billy", "alert", "after", "fifth", "chase", "hairy", "share", "still", "lease", "links", "today", "plain", "boost", "brand", "threw", "apple", "album", "broad", "noise", "breed", "maybe", "curve", "draft", "booth", "eager", "brief", "delay", "raise", "stand", "rapid", "these", "close", "aside", "clear", "their", "plane", "about", "earth", "bases", "small"],
-    colours: ["amber", "ashen", "azure", "beige", "beryl", "black", "blond", "blush", "brown", "coral", "cream", "dusky", "ebony", "eosin", "flame", "green", "gules", "hazel", "henna", "hoary", "indol", "ivory", "khaki", "lemon", "liard", "liart", "lilac", "livid", "lovat", "lyart", "mauve", "milky", "mocha", "mousy", "murex", "ochre", "olive", "orcin", "orpin", "pansy", "peach", "pearl", "rouge", "ruddy", "sable", "sandy", "sepia", "smoky", "snowy", "sooty", "steel", "straw", "taupe", "tawny", "topaz", "unmber", "virid", "wheat", "white"],
-    countries: ["aruba", "benin", "chile", "china", "chile", "egypt", "ghana", "india", "italy", "japan", "kenya", "laos", "malta", "nepal", "niger", "oman", "qatar", "sudan", "tonga", "yemen", "zambia"],
+    normal: ["worst", "youth", "happy", "state", "billy", "alert", "after", "fifth", "chase", "hairy", "share", "still", "lease", "links", "today", "plain", "boost", "brand", "threw", "apple", "album", "broad", "china", "chain", "chart", "judge", "mouse", "mango", "slice", "smart", "sheep", "phone", "steal", "shiny", "think", "treat", "young", "equal", "words", "otter"],
+    colours: ["azure", "beige", "black", "blush", "brown", "coral", "cream", "crimson", "green", "ivory", "khaki", "lilac", "linen", "melon", "navy", "olive", "peach", "periwinkle", "pink", "plum", "puce", "red", "rose", "salmon", "sepia"],
+    countries: ["china", "chile", "egypt", "ghana", "india", "italy", "japan", "kenya", "laos", "malta", "nepal", "niger", "oman", "qatar", "sudan", "tonga", "yemen", "zambia"],
     animals: ["snake", "eagle", "horse", "otter", "panda", "shark", "sheep", "skunk", "sloth", "snail", "swine", "tiger", "toad", "whale", "wombat", "zebra"],
     food: ["apple", "bread", "grape", "kiwi", "lemon", "mango", "melon", "olive", "onion", "orange", "peach", "pecan", "plum", "salad", "toast", "treat"]
 };
@@ -36,6 +37,28 @@ function startGame(category) {
     currentGuess = [];
     nextLetter = 0;
     initBoard();
+    initKeyboard();
+}
+
+function initKeyboard() {
+    const keyboardLayout = [
+        ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+        ['Backspace', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Enter']
+    ];
+    let keyboard = document.getElementById('keyboard-cont');
+    keyboard.innerHTML = '';
+    keyboardLayout.forEach(row => {
+        let rowDiv = document.createElement('div');
+        row.forEach(key => {
+            let button = document.createElement('button');
+            button.textContent = key === 'Backspace' ? 'Del' : key === 'Enter' ? 'Enter' : key;
+            button.className = 'keyboard-button';
+            button.onclick = () => handleKeyClick(key);
+            rowDiv.appendChild(button);
+        });
+        keyboard.appendChild(rowDiv);
+    });
 }
 
 function handleKeyClick(key) {
@@ -68,6 +91,8 @@ function insertLetter(letter) {
 }
 
 function deleteLetter() {
+    if (nextLetter === 0) return;
+
     let row = document.getElementsByClassName('letter-row')[6 - guessesRemaining];
     let box = row.children[nextLetter - 1];
     box.textContent = '';
