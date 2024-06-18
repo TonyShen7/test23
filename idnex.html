@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codle</title>
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="js/script.js" defer></script>
+    <style>
+        body {
+            background-color: black;
+        }
+        h1 {
+            font-family: 'Times New Roman', cursive;
+            color: white;
+            font-size: 80px;
+            font-weight: bold;
+            text-shadow: 2px 2px black;
+        }
+        h3 {
+            font-family: 'Times New Roman', cursive;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 2px 2px lightblue;
+        }
+        #game-board {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .letter-box {
+            background-color: white;
+            border: 2px solid gray;
+            border-radius: 3px;
+            margin: 2px;
+            font-size: 20px;
+            font-weight: 700;
+            height: 60px;
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+        }
+        .letter-row {
+            display: flex;
+        }
+        #keyboard-cont {
+            margin: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #keyboard-cont div {
+            display: flex;
+        }
+        .second-row {
+            margin: 0.5px;
+        }
+        .keyboard-button {
+            padding: 0.5px;
+            margin: 0 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 80px;
+            height: 50px;
+            font-weight: bold;
+            font-size: 15px;
+            font-family: 'Times New Roman', cursive;
+            background-color: white;
+            color: black;
+            border: 4px solid lightblue;
+            text-align: center;
+            text-decoration: none;
+            display: inside;
+        }
+        .dropbtn {
+            font-family: 'Times New Roman', cursive;
+            background-color: blue;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {background-color: #ddd;}
+        .dropdown:hover .dropdown-content {display: block;}
+        .dropdown:hover .dropbtn {background-color: lightblue;}
+    </style>
+</head>
+<body>
+    <center><h1>Codle - Normal</h1></center>
+    <h3>Instruction: You have six guesses to figure out the correct word!</h3>
+    <br>
+    <div id="game-board"></div>
+    <div class="dropdown">
+        <button class="dropbtn">Categories</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="startGame('animals')">Animals</a>
+            <a href="#" onclick="startGame('colours')">Colours</a>
+            <a href="#" onclick="startGame('countries')">Countries</a>
+            <a href="#" onclick="startGame('food')">Food</a>
+        </div>
+    </div>
+    <div id="keyboard-cont">
+        <div class="first-row">
+            <button class="keyboard-button" onclick="handleKeyClick('q')">q</button>
+            <button class="keyboard-button" onclick="handleKeyClick('w')">w</button>
+            <button class="keyboard-button" onclick="handleKeyClick('e')">e</button>
+            <button class="keyboard-button" onclick="handleKeyClick('r')">r</button>
+            <button class="keyboard-button" onclick="handleKeyClick('t')">t</button>
+            <button class="keyboard-button" onclick="handleKeyClick('y')">y</button>
+            <button class="keyboard-button" onclick="handleKeyClick('u')">u</button>
+            <button class="keyboard-button" onclick="handleKeyClick('i')">i</button>
+            <button class="keyboard-button" onclick="handleKeyClick('o')">o</button>
+            <button class="keyboard-button" onclick="handleKeyClick('p')">p</button>
+        </div>
+        <div class="second-row">
+            <button class="keyboard-button" onclick="handleKeyClick('a')">a</button>
+            <button class="keyboard-button" onclick="handleKeyClick('s')">s</button>
+            <button class="keyboard-button" onclick="handleKeyClick('d')">d</button>
+            <button class="keyboard-button" onclick="handleKeyClick('f')">f</button>
+            <button class="keyboard-button" onclick="handleKeyClick('g')">g</button>
+            <button class="keyboard-button" onclick="handleKeyClick('h')">h</button>
+            <button class="keyboard-button" onclick="handleKeyClick('j')">j</button>
+            <button class="keyboard-button" onclick="handleKeyClick('k')">k</button>
+            <button class="keyboard-button" onclick="handleKeyClick('l')">l</button>
+        </div>
+        <div class="third-row">
+            <button class="keyboard-button" onclick="handleKeyClick('Backspace')">Del</button>
+            <button class="keyboard-button" onclick="handleKeyClick('z')">z</button>
+            <button class="keyboard-button" onclick="handleKeyClick('x')">x</button>
+            <button class="keyboard-button" onclick="handleKeyClick('c')">c</button>
+            <button class="keyboard-button" onclick="handleKeyClick('v')">v</button>
+            <button class="keyboard-button" onclick="handleKeyClick('b')">b</button>
+            <button class="keyboard-button" onclick="handleKeyClick('n')">n</button>
+            <button class="keyboard-button" onclick="handleKeyClick('m')">m</button>
+            <button class="keyboard-button" onclick="handleKeyClick('Enter')">Enter</button>
+        </div>
+    </div>
+</body>
+</html>
